@@ -28,18 +28,10 @@ export default async function handler(req, res) {
   if (req.method === "DELETE") {
     console.log("DELETE 호출!!");
     const {
-      body: {
-        data: { shopName, shopMenu, shopPrice },
-      },
       query: { id },
     } = req;
 
     const result = await client.shop.delete({
-      data: {
-        shopName,
-        shopMenu,
-        shopPrice: parseInt(shopPrice),
-      },
       where: {
         id: +id,
       },

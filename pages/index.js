@@ -69,23 +69,9 @@ const ShopForm = () => {
   };
 
   const deleteShop = async () => {
-    const shopName = getValues("shopName");
-    const shopMenu = getValues("shopMenu");
-    const shopPrice = getValues("shopPrice");
-
     const response = await (
       await fetch(`/api/shop/${id}`, {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          data: {
-            shopName: shopName,
-            shopMenu: shopMenu,
-            shopPrice: shopPrice,
-          },
-        }),
       })
     ).json();
     console.log(response);
@@ -165,8 +151,9 @@ const ShopForm = () => {
           button {
             width: 100px;
             height: 40px;
-            margin: 30px 10px;
+            margin: 50px 10px;
             border: none;
+            border-radius: 4px;
             background: #ccc;
             cursor: pointer;
           }
