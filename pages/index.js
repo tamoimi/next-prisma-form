@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const ShopForm = () => {
@@ -6,6 +7,7 @@ const ShopForm = () => {
     handleSubmit,
     formState: { errors },
     getValues,
+    setValue,
   } = useForm({
     mode: "onChange",
   });
@@ -36,6 +38,57 @@ const ShopForm = () => {
       })
     ).json();
     console.log("result", result);
+    setId(result.id);
+    setValue("shopMenu", result.shopMenu);
+    setValue("shopPrice", result.shopPrice);
+  };
+
+  const [id, setId] = useState(0);
+
+  const upDate = async () => {
+    const shopName = getValues("shopName");
+    const shopMenu = getValues("shopMenu");
+    const shopPrice = getValues("shopPrice");
+
+    const response = await (
+      await fetch(`/api/shop/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: {
+            shopName: shopName,
+            shopMenu: shopMenu,
+            shopPrice: shopPrice,
+          },
+        }),
+      })
+    ).json();
+    console.log(response);
+  };
+
+  const deleteShop = async () => {
+    const shopName = getValues("shopName");
+    const shopMenu = getValues("shopMenu");
+    const shopPrice = getValues("shopPrice");
+
+    const response = await (
+      await fetch(`/api/shop/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: {
+            shopName: shopName,
+            shopMenu: shopMenu,
+            shopPrice: shopPrice,
+          },
+        }),
+      })
+    ).json();
+    console.log(response);
   };
 
   return (
@@ -76,7 +129,10 @@ const ShopForm = () => {
         <button type="button" onClick={getShop}>
           불러오기
         </button>
-        <button type="button" >
+        <button type="button" onClick={upDate}>
+          업데이트
+        </button>
+        <button type="button" onClick={deleteShop}>
           삭제하기
         </button>
       </form>

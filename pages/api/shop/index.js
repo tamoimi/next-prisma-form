@@ -1,4 +1,4 @@
-import client from "../libs/prismaClient";
+import client from "../../libs/prismaClient";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -29,7 +29,7 @@ export default async function handler(req, res) {
 
     const result = await client.shop.findUnique({
       select: {
-        id: false,
+        id: true,
         shopName: true,
         shopMenu: true,
         shopPrice: true,
