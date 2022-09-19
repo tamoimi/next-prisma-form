@@ -5,6 +5,7 @@ const ShopForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    getValues,
   } = useForm({
     mode: "onChange",
   });
@@ -24,6 +25,17 @@ const ShopForm = () => {
     ).json();
     //여기에서 .json의 역할은 결과물이 json으로 자동으로 넘어가겠다
     console.log(response);
+  };
+
+  const getShop = async () => {
+    console.log("getShop 호출됨");
+    const shopName = getValues("shopName");
+    const result = await (
+      await fetch(`/api/shop?shopName=${shopName}`, {
+        method: "GET",
+      })
+    ).json();
+    console.log("result", result);
   };
 
   return (
@@ -61,6 +73,12 @@ const ShopForm = () => {
         {errors.shopPrice && <p>{errors.shopPrice.message}</p>}
         <br />
         <button type="submit">입력하기</button>
+        <button type="button" onClick={getShop}>
+          불러오기
+        </button>
+        <button type="button" >
+          삭제하기
+        </button>
       </form>
 
       <style jsx>
@@ -85,12 +103,13 @@ const ShopForm = () => {
             height: 35px;
             margin: 5px 0 0 0;
             border: 1px solid #ccc;
+            border-radius: 4px;
             padding: 0 15px;
           }
           button {
             width: 100px;
             height: 40px;
-            margin: 30px 0;
+            margin: 30px 10px;
             border: none;
             background: #ccc;
             cursor: pointer;
