@@ -126,7 +126,7 @@ const ShopForm = () => {
       <style jsx>
         {`
           form {
-            width: 500px;
+            width: 600px;
             height: 500px;
             margin: 100px auto;
             box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -156,6 +156,9 @@ const ShopForm = () => {
             border-radius: 4px;
             background: #ccc;
             cursor: pointer;
+          }
+          button:hover {
+            opacity: 0.7;
           }
           p {
             font-size: 14px;
