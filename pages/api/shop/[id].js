@@ -40,3 +40,6 @@ export default async function handler(req, res) {
     res.status(200).json(result);
   }
 }
+
+// id를 사용할때 +id 형태로 사용하는 것은, 받은 id가 숫자인지 확실하지 않기 때문에
+// 숫자로 변환시키기 위해 +를 붙여준다.
